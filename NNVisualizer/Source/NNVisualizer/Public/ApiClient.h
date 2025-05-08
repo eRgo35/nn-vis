@@ -39,5 +39,6 @@ public:
 	FOnStructureUpdateFinished OnStructureUpdateFinished;
 	void InitStructure(TArray<LayerData>* _layersData);
 	void update();
-	
+	void requestInitStructure();
+	void setupInitStructure(const FString& ResponseContent);
 };
