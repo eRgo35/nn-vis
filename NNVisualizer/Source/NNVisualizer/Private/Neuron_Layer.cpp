@@ -43,7 +43,37 @@ ANeuron* ANeuron_Layer::spawnNeuron(int32 positionX, int32 positionZ)
 
 }
 
-//todo finish update function (pos/bias)
+TArray<FVector> ANeuron_Layer::getNeuronLocations()
+{
+	TArray<FVector> tmp;
+	for (auto& n : m_neurons) {
+		if (n->neuron) {
+			tmp.Add(n->neuron->GetActorLocation());
+		}
+		else {
+			//std::ofstream("log.txt");
+
+			UE_LOG(LogTemp, Error, TEXT("Neuron is destroyed or invalid!"));
+		}
+	}
+
+	return tmp;
+}
+
+void ANeuron_Layer::update()
+{
+	for (int32 i = 0; i < m_height; i++)
+		for (int32 j = 0; j < m_width; j++) {
+			m_neurons[i * m_width + j]->neuron->setActivation(m_neurons[i * m_width + j]->activation);
+			//update bias
+			m_neurons[i * m_width + j]->neuron->SetActorLocation(FVector(
+				i * m_neuronSpacing + m_layerPosition.X,
+				m_neurons[i * m_width + j]->bias + m_layerPosition.Y,
+				j * m_neuronSpacing + m_layerPosition.Z
+			));
+		}
+}
+
 
 // Called when the game starts or when spawned
 void ANeuron_Layer::BeginPlay()

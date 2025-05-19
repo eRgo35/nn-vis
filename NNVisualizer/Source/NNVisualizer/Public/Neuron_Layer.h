@@ -4,8 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Neuron_Layer.generated.h"
 #include "Neuron.h"
+#include "Neuron_Layer.generated.h"
 
 typedef struct NeuronData {
 	ANeuron* neuron;
@@ -33,7 +33,6 @@ public:
 
 protected:
 	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
 	virtual void BeginPlay() override;
 	virtual ANeuron* spawnNeuron(int32 positionX, int32 positionZ);
 	TArray< NeuronData*> m_neurons;
