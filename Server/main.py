@@ -1,6 +1,4 @@
-def main():
-    print("Hello from server!")
-
+from server import pocDemo as app
 
 if __name__ == "__main__":
-    main()
+    app.run(debug=True)
